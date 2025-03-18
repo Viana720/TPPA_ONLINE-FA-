@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-br" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPPA</title>
+    <link  href="/assets/img/chart.jpg" rel="icon" type="image/jpg">
+    <link rel="stylesheet" href="cdn/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./cdn/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="./cdn/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+   
+    <!-- scripts -->
+    <script src="./cdn/js/jquery-3.7.1.js"></script>
+    <script src="./cdn/js/dataTables.js"></script>
+    <script src="cdn/js/popper.min.js"></script>
+    <script src="cdn/js/bootstrap.min.js"></script>
+    <script src="cdn/js/chart.js"></script>
+    <script src="cdn/js/chartjs-plugin-annotation@1.1.0"></script>
+    <script src="./cdn/js/jquery.dataTables.min.js"></script>
+    <script src="cdn/js/chartjs-plugin-datalabels@2.js"></script>
+    <script src="cdn/js/html2canvas.min.js"></script>
+    <script src="cdn/js/html2pdf.bundle.min.js"></script>
+    <script src="cdn/js/sweetalert2@11.js"></script>
+
+    <script src="index.js"></script>
+
+    <!---->
+</head>
+<body style="width: 100%;" id="tela">
+    <h1></h1>
+    <div id="container2">
+
+        <div>
+            <img src="./assets/img/visteon-wordmark-white.png" alt="">
+        </div>  
+
+        <div class="date-container" style="color: #f8fafc;">
+            <label for="date-picker" class="form-label">First Date:</label>
+            <input type="date" class="form-control date-input" id="date-picker">
+        </div>
+                                                                                                                
+        <div class="date-container2" style="color: #f8fafc;">
+            <label for="date-picker" class="form-label">Final Date:</label>
+            <input type="date" class="form-control date-input" id="date-picker2">
+        </div>
+
+       <div class="dropdown" style="color: #f8fafc;"> Process:
+            <a id="dropdownMenuButton" class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Line
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        
+            </ul>
+        </div>
+
+        <button class="btn btn-primary btn-custom" id="carregaGraficos" type="submit" title="Gerar gráficos." >
+            <img src="./assets/img/andon.svg" alt="Andon" style="margin-right: 5px; vertical-align: middle;"> Generate charts
+        </button>
+
+        <button id="exibirTabela" title="Acessar tabela do Plano de Ação." style="display: flex; align-items: center; color: #f8fafc; padding-top: 9px; margin-top: 11px; height: 37px;" class="btn btn-info" style="margin-top: 20px;" data-bs-toggle="modal" data-bs-target="#modalTabela">
+            <img src="./assets/img/action.svg"alt="Ícone de usuário" style="margin-right: 5px; ">Action plan</button>
+
+        <div class="d-grid gap-2 d-md-block" style="margin-top: 2px ;">
+            <button class="btn btn-primary" type="button" id ="Download"  style="display: flex; align-items: center "title="Baixar dashboard como arquivo PDF.">
+                <img src="./assets/img/baixar.svg"alt="Ícone de usuário" style="margin-right: 5px;">Download</button>
+          </div>
+
+    </div>
+
+   <div id ='completo'>
+
+    <!--FTT OPEX, Composto e Pareto-->
+    <div id="conj">
+
+        <div id="loading-spinner" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(64, 184, 146, 0.3); z-index: 1000; justify-content: center; align-items: center;">
+            <div class="spinner-border" role="status" style="border-width: 0.5em; width: 4rem; height: 4rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="card text-bg-dark" name="card" id="card1" style="border: none;">
+            <div class="card-img-overlay" style="background-color: rgb(14,74, 114);">
+                <h5 class="card-title">TREND - FTT</h5>
+                <div class="chart-container">
+                    
+                    <canvas id="g1" width="385px" height="80px"></canvas>
+                   
+                
+                    <canvas id="g2" width="385px" height="80px" style="margin-top: 10px;"></canvas>
+                    
+                </div>
+            </div>
+        </div>
+    
+        <div class="card text-bg-dark" name="card" id="card2" style="border: none">
+            <div class="card-img-overlay" style="background-color: rgb(14,74, 114);">
+                <h5 class="card-title">PARETO</h5>
+                <div class="chart-container">
+                    
+                    <canvas id="g3" width="300px" height="130px"></canvas>
+                  
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <!--Paynter e Action-->
+        <div id="conj2"> 
+            <div class="card text-bg-dark" name="card" id="card3" style="border: none;">
+                <div class="card-img-overlay" style="background-color: rgb(14,74, 114);">
+                    <h5 class="card-title">PAYNTER</h5>
+                    <div>
+                        <h6>Production:</h6>
+                        
+                        <div class="table-container">
+                            <table id="tabelaResultados" style="width: 100%; text-align: center; background-color: rgb(190, 229, 235); border-radius: 25px; color:black;">
+                                <thead id="titulo" style="border-radius: 25px;">
+                                    <tr id="linhas">
+                                        <th>Date</th>
+                                        <th>Operation</th>
+                                        <th>QTD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-bg-dark" name="card" id="card4" style="border: none">
+                <div class="card-img-overlay" style="background-color: rgb(14,74, 114);">
+                    <h5 class="card-title">ACTION</h5>
+
+                     <!--  Botao de formulário 1 -->
+                     <button type="button" class="btn btn-success" id="action" data-bs-toggle="modal" data-bs-target="#myModal1" style="display: flex; align-items: center;"
+                     title="Formular plano de ação para a falha mais recorrente. ">
+                        <img src="./assets/img/actions.svg" alt="Ícone de download" style="margin-right: 5px;">TOP 1</button>
+            
+                     <!-- Modal 1 -->
+                     <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+                         <div class="modal-dialog" style="max-width: 900px;">
+                             <div class="modal-content">
+                                 <div class="modal-header" style="background-color: rgb(14,74, 114);">
+                                        <h5 class="modal-title" id="myModalLabel1" style ="color: #f8fafc " >Action Plan 1</h5>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                     <form>
+                                         <div class="row mb-3">
+                                             <div class="col-md-6">
+                                                 <label for="operacao1" class="form-label" style="color: black">Operation:</label>
+                                                 <input type="text" class="form-control" id="operacao1" maxlength="10" required>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <label for="falha1" class="form-label" style="color: black">Failure:</label>
+                                                 <input type="text" class="form-control" id="falha1" maxlength="50" required>
+                                             </div>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="causa1" class="form-label" style="color: black">Cause:</label>
+                                             <textarea class="form-control" id="causa1" rows="3" required></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="acao1" class="form-label" style="color: black">Action:</label>
+                                             <textarea class="form-control" id="acao1" rows="3" required></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="responsaveis1" class="form-label" style="color: black">Resp:</label>
+                                             <input type="text" class="form-control" id="responsaveis1" required>
+                                         </div>
+                                         <div class="row mb-3">
+                                             <div class="col-md-6">
+                                                 <label for="implementacao1" class="form-label" style="color: black">Target Date:</label>
+                                                 <input type="date" class="form-control" id="implementacao1" required>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <label class="form-label" style="color: black">Status</label><br>
+                                                 <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="status1" id="emAndamento1" value="emAndamento">
+                                                     <label class="form-check-label" for="emAndamento1" style="color: black">In progress</label>
+                                                 </div>
+                                                 <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="status1" id="concluido1" value="concluido">
+                                                     <label class="form-check-label" for="concluido1" style="color: black">Done</label>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </form>
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-secondary" id="close_form"  style="display: flex; align-items: center;" data-bs-dismiss="modal">
+                                        <img src="./assets/img/out.svg" alt="Ícone de download" style="margin-right: 5px;"></button>
+                                     <button type="button" class="btn btn-primary" id="save_form" style="display: flex; align-items: center;" onclick="saveForm('1')">
+                                        <img src="./assets/img/save.svg" alt="Ícone de download" style="margin-right: 5px;"></button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+             
+                     <!-- Botao de formulário 2 -->
+                     <button type="button" class="btn btn-success" id="action2" data-bs-toggle="modal" data-bs-target="#myModal2" style="display: flex; align-items: center;"
+                     title="Formular plano de ação para a segunda falha mais recorrente. ">
+                        <img src="./assets/img/actions.svg" alt="Ícone de download" style="margin-right: 5px;">TOP 2</button>
+             
+                     <!-- Modal 2 -->
+                     <div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="myModalLabel2" aria-hidden="true">
+                         <div class="modal-dialog" style="max-width: 900px;">
+                             <div class="modal-content">
+                                 <div class="modal-header" style="background-color: rgb(14,74, 114);">
+                                     <h5 class="modal-title" id="myModalLabel2" style ="color: #f8fafc " >Action Plan 2</h5>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                     <form>
+                                         <div class="row mb-3">
+                                             <div class="col-md-6">
+                                                 <label for="operacao2" class="form-label" style="color: black">Operation:</label>
+                                                 <input type="text" class="form-control" id="operacao2" maxlength="10" required>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <label for="falha2" class="form-label" style="color: black">Failure:</label>
+                                                 <input type="text" class="form-control" id="falha2" maxlength="50" required>
+                                             </div>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="causa2" class="form-label" style="color: black">Cause:</label>
+                                             <textarea class="form-control" id="causa2" rows="3" required></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="acao2" class="form-label" style="color: black">Action:</label>
+                                             <textarea class="form-control" id="acao2" rows="3" required></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="responsaveis2" class="form-label" style="color: black">Resp:</label>
+                                             <input type="text" class="form-control" id="responsaveis2" required>
+                                         </div>
+                                         <div class="row mb-3">
+                                             <div class="col-md-6">
+                                                 <label for="implementacao2" class="form-label" style="color: black">Target Date:</label>
+                                                 <input type="date" class="form-control" id="implementacao2" required>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <label class="form-label" style="color: black">Status</label><br>
+                                                 <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="status2" id="emAndamento2" value="emAndamento">
+                                                     <label class="form-check-label" for="emAndamento2" style="color: black">In progress</label>
+                                                 </div>
+                                                 <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="status2" id="concluido2" value="concluido">
+                                                     <label class="form-check-label" for="concluido2" style="color: black">Done</label>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </form>
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-secondary" id="close_form2"  style="display: flex; align-items: center;" data-bs-dismiss="modal">
+                                        <img src="./assets/img/out.svg" alt="Ícone de download" style="margin-right: 5px;"></button>
+                                     <button type="button" class="btn btn-primary" id="save_form2"  style="display: flex; align-items: center;" onclick="saveForm('2')">
+                                        <img src="./assets/img/save.svg" alt="Ícone de download" style="margin-right: 5px;"></button>
+                                    
+                                 </div>
+                                 
+                                 
+                             </div>
+                         </div>
+                     </div>
+             
+                     <!-- Botao de formulário 3 -->
+                     <button type="button" class="btn btn-success" id="action3" data-bs-toggle="modal" data-bs-target="#myModal3" style="display: flex; align-items: center;"
+                     title="Formular plano de ação para a terceira falha mais recorrente. ">
+                        <img src="./assets/img/actions.svg" alt="Ícone de download" style="margin-right: 5px;">TOP 3</button>
+             
+                     <!-- Modal 3 -->
+                     <div class="modal fade" id="myModal3" tabindex="-1" aria-labelledby="myModalLabel3" aria-hidden="true">
+                         <div class="modal-dialog" style="max-width: 900px;">
+                             <div class="modal-content">
+                                 <div class="modal-header" style="background-color: rgb(14,74, 114);">
+                                     <h5 class="modal-title" id="myModalLabel3" style ="color: #f8fafc " >Action Plan 3</h5>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                     <form>
+                                         <div class="row mb-3">
+                                             <div class="col-md-6">
+                                                 <label for="operacao3" class="form-label" style="color: black">Operation:</label>
+                                                 <input type="text" class="form-control" id="operacao3" maxlength="10" required>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <label for="falha3" class="form-label" style="color: black">Failure:</label>
+                                                 <input type="text" class="form-control" id="falha3" maxlength="50" required>
+                                             </div>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="causa3" class="form-label" style="color: black">Cause:</label>
+                                             <textarea class="form-control" id="causa3" rows="3" required></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="acao3" class="form-label" style="color: black">Action:</label>
+                                             <textarea class="form-control" id="acao3" rows="3" required></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="responsaveis3" class="form-label" style="color: black">Resp:</label>
+                                             <input type="text" class="form-control" id="responsaveis3" required>
+                                         </div>
+                                         <div class="row mb-3">
+                                             <div class="col-md-6">
+                                                 <label for="implementacao3" class="form-label" style="color: black">Target Date:</label>
+                                                 <input type="date" class="form-control" id="implementacao3" required>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <label class="form-label" style="color: black">Status</label><br>
+                                                 <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="status3" id="emAndamento3" value="emAndamento">
+                                                     <label class="form-check-label" for="emAndamento3" style="color: black">In progress</label>
+                                                 </div>
+                                                 <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="status3" id="concluido3" value="concluido">
+                                                     <label class="form-check-label" for="concluido3" style="color: black">Done</label>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </form>
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-secondary" id="close_form3"  style="display: flex; align-items: center;" data-bs-dismiss="modal">
+                                        <img src="./assets/img/out.svg" alt="Ícone de download"></button>
+                                     <button type="button" class="btn btn-primary" id="save_form3"  style="display: flex; align-items: center;" onclick="saveForm('3')">
+                                        <img src="./assets/img/save.svg" alt="Ícone de download" style="margin-right: 5px;"></button>
+                                 </div>
+                             </div>
+                         </div>
+
+                         
+                    </div>
+
+                    
+                    <!-- Modal para exibir a tabela -->
+                    <div class="modal fade" id="modalTabela" tabindex="-1" aria-labelledby="modalTabelaLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content" id="tela2">
+                                <div class="modal-header" style="background-color: rgb(14,74, 114)">
+                                    <h5 class="modal-title" id="modalTabelaLabel">Action Plan</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" >
+                                    <table class="table table-striped table-bordered"  >
+                                        <thead >
+                                            <tr>
+                                                <th>Operation</th>
+                                                <th>Failure</th>
+                                                <th>Cause</th>
+                                                <th>Action</th>
+                                                <th>Resp</th>
+                                                <th>Target Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabelaDados">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="fechar" data-bs-dismiss="modal">Close</button>
+                                    <div class="d-grid gap-2 d-md-block" style="padding-bottom: 12px;">
+                                        <button class="btn btn-primary" type="button" id ="andon" style="display: flex; align-items: center;"
+                                        title="Redirecionamento para sistema de manutenção."><img src="./assets/img/andon.svg" alt="Andon" style="margin-right: 5px;">
+                                        Andon
+                                    </button>
+                                    </div>
+                                       <div class="d-grid gap-2 d-md-block" style="padding-bottom: 12px;">
+                                        <button class="btn btn-primary" type="button" id="Download2" style="display: flex; align-items: center;"
+                                        title="Baixar plano de ação como arquivo em PDF.">
+                                          <img src="./assets/img/download_action.svg" alt="Ícone de download" style="margin-right: 5px;">
+                                          Download
+                                        </button>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+   
+                
+
+                </div>
+            </div>
+        </div>
+
+
+            
+</body>
+</html>
+

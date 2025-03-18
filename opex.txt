@@ -1,0 +1,63 @@
+http://10.137.174.13:8585/sistema_opex/view/dashboard/graficos.php
+
+
+--IN ('$operacoes_list')
+
+opex projectpreciso de algo mais substancial
+
+/*document.addEventListener("DOMContentLoaded", function () {
+    // Elementos principais
+    const tabelaDados = document.getElementById("tabelaDados");
+    const tabelaContainer = document.getElementById("tabelaDadosContainer");
+    const exibirTabelaButton = document.getElementById("exibirTabela");
+
+    // Função para salvar os dados do formulário
+    function salvarFormulario(modalId) {
+        const modal = document.querySelector(`#${modalId}`);
+        const operation = modal.querySelector("input[id^='operacao']").value;
+        const failure = modal.querySelector("input[id^='falha']").value;
+        const cause = modal.querySelector("textarea[id^='causa']").value;
+        const action = modal.querySelector("textarea[id^='acao']").value;
+        const resp = modal.querySelector("input[id^='responsaveis']").value;
+        const targetDate = modal.querySelector("input[id^='implementacao']").value;
+        const status = modal.querySelector("input[name^='status']:checked")?.nextElementSibling.textContent || "Not set";
+
+        // Verifica se todos os campos obrigatórios estão preenchidos
+        if (!operation || !failure || !cause || !action || !resp || !targetDate) {
+            alert("Por favor, preencha todos os campos obrigatórios!");
+            return;
+        }
+
+        // Adiciona os dados à tabela
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${operation}</td>
+            <td>${failure}</td>
+            <td>${cause}</td>
+            <td>${action}</td>
+            <td>${resp}</td>
+            <td>${targetDate}</td>
+            <td>${status}</td>
+        `;
+        tabelaDados.appendChild(row);
+
+        // Exibe um alerta confirmando o salvamento
+        alert("Dados salvos com sucesso!");
+
+        // Fecha o modal
+        bootstrap.Modal.getInstance(modal).hide();
+    }
+
+    // Event listeners para cada botão "Save changes"
+    document.querySelectorAll(".modal-content button.btn-primary").forEach((button, index) => {
+        button.addEventListener("click", function () {
+            salvarFormulario(`myModal${index + 1}`);
+        });
+    });
+
+    // Exibe a tabela ao clicar no botão
+    exibirTabelaButton.addEventListener("click", function () {
+        tabelaContainer.style.display = "block";
+    });
+});*/
+/

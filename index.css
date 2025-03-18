@@ -1,0 +1,330 @@
+
+#completo{
+
+    height: 100%;
+    width: 100%;
+} 
+
+#container2 {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: rgb(14, 74, 114);
+    padding: 10px;
+}
+
+.date-container, .date-container2, .dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/*Linhas*/
+.dropdown-menu .dropdown-item {
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #4eff65;
+    color: #f8fafc;
+}
+
+/*Operaçoes*/
+.dropdown-menu2 .dropdown-item2 {
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu2 .dropdown-item:hover {
+    background-color: #0ae8a1;
+    color: #f8fafc;
+}
+
+.date-input {
+    width: auto;
+}
+
+
+.btn-custom, #action, #action2, #action3, #carregaGraficos ,#Download, #Download2, #andon, #exibirTabela, #save_form, #save_form2, #save_form3 {
+    border: none;
+    background-color: #30698a;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+.btn-custom:hover, #action:hover, #action2:hover, #action3:hover, #Download:hover, #Download2:hover, #andon:hover, #exibirTabela:hover,
+#save_form:hover, #save_form2:hover, #save_form3:hover,  #carregaGraficos:hover{
+    background-color: #ff9b05;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+
+#save_form:hover, #save_form2:hover, #save_form3:hover{
+    background-color:  #0ae8a1;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+
+/*botao fechar modal*/
+
+ #fechar, #close_form, #close_form2, #close_form3, #dropdownMenuButton{
+    border: none;
+    background-color: #474747;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+#fechar:hover, #close_form:hover, #close_form2:hover, #close_form3:hover, #dropdownMenuButton:hover{
+    background-color: #474747;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+
+/*Botao para download de imagem*/
+.btn img{
+    width: 20px;
+    height: 20px;
+}
+/*boataoexibirmodal*/
+
+
+img {
+    height: 100%;
+    width: 200px;
+}
+
+#pag{
+   margin-top: 217px;
+   margin-left: 155px;
+}
+
+#conj {
+    display: flex;
+    position: relative;
+    width: 100%;
+    
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+#conj2 {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-right: 50%;
+   
+}
+
+                                                
+canvas {
+    background-color: white;
+} 
+
+/**/
+
+#card1 {
+    height: 400px       ;
+    width: 800px;
+    margin-top: 50px;
+    margin: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#card2 {
+    height: 400px;
+    width: 800px;
+    margin-top: 50px;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+#card3 {
+    height: 350px;
+    width: 800px;
+    margin-top: 50px;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+#card4 {
+    height: 350px;
+    width: 800px;
+    margin-top: 50px;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+input {
+    width: 100%;
+}
+
+button {
+    margin-top: 10px;
+}
+
+/*gif loading*/
+
+.loading-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o texto */
+    font-size: 16px;
+    color: #888;
+    display: none; /* Inicialmente oculto */
+}
+
+
+#g3{
+    margin-left: 11px;
+    margin-bottom: 100px;
+}
+
+/*texto_produção*/
+#quantidadeProduzida{
+    margin-left: 22px;
+    border: none;
+    border-radius: 20px;
+
+}
+
+/*tabela*/
+/* Estilo das linhas */
+#tabelaResultados tr:nth-child(odd) {
+    background-color: #5499C7; /* Cor para linhas ímpares */
+}
+
+#tabelaResultados tr:nth-child(even) {
+    background-color: #A9CCE3; /* Cor para linhas pares */
+}
+
+/* Estilo das células */
+#tabelaResultados td {
+    color: black; /* Garante que o texto seja visível */
+    text-align: center; /* Centraliza o texto */
+    padding: 10px; /* Adiciona espaçamento interno */
+}
+
+/* Estilo do cabeçalho */
+#tabelaResultados th {
+    color: white;
+    background-color: #2C3E50; /* Fundo para o cabeçalho */
+    padding: 10px; /* Adiciona espaçamento interno */
+    text-align: center;
+}
+
+/*contêinerDatabela*/
+
+/* Contêiner para a tabela */
+.table-container {
+    max-height: 250px; /* Altura máxima  */
+    overflow-y: auto; /* Barra de rolagem vertical */
+   /* overflow-x: auto;  Barra de rolagem horizontal */
+    border: 1px solid #ccc; /* Opcional: borda para destacar a área */
+    border-radius: 10px; /* Opcional: bordas arredondadas */
+}
+
+/* Ajuste opcional para tabela larga */
+#tabelaResultados {
+    min-width: 250px; /* Define um tamanho mínimo */
+    border-collapse: collapse; /* Remove o espaçamento interno entre células */
+}
+
+/* Estilo das linhas para visualização */
+#tabelaResultados tr:nth-child(odd) {
+    background-color: #5499C7;
+}
+
+#tabelaResultados tr:nth-child(even) {
+    background-color: #A9CCE3;
+}
+
+
+
+/*Action*/
+#action {
+    width: 50%;
+    height: 85px;
+    margin-left: 150px;
+    margin-bottom: 5px; /* Espaçamento abaixo do botão 1 */
+}
+
+#action2 {
+    width: 50%;
+    height: 85px;
+    margin-left: 150px;
+    margin-bottom: 5px; /* Espaçamento abaixo do botão 2 */
+}
+
+#action3 {
+    width: 50%;
+    height: 85px;
+    margin-left: 150px;
+    margin-bottom: 0; /* Sem necessidade de margem abaixo do último botão */
+}
+
+/*alerta*/
+
+.alerta {
+    position: fixed;
+    bottom: 20px;
+    left: -300px;
+    background-color: #f2f2f2;
+    border: 1px solid #888;
+    padding: 20px;
+    z-index: 1000;
+    transition: left 0.5s ease-in-out;
+  }
+  
+  .alerta.mostrar {
+    left: 20px;
+  }
+  
+  .fechar {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+
+  .chart-container {
+    position: relative; /* Adicione esta linha */
+}
+
+
+  /*loading*/
+  .loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: rgb(14,74, 114);
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    margin-left: -15px;
+    background-color: rgba(255, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+  
