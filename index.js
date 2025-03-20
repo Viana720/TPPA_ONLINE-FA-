@@ -19,8 +19,8 @@
     });
 });
 
-// 
-//selecionar uma linha
+
+// Selecionar uma linha
 let linhaSelecionada = null;
 
 $(document).on('click', '.dropdown-item', function (e) {
@@ -29,7 +29,7 @@ $(document).on('click', '.dropdown-item', function (e) {
     $('#dropdownMenuButton').text(`${linhaSelecionada}`); // Atualiza o texto do botão
 });
 
-//Função para gerar os graficos
+// Gerar os graficos
 $(function () {
     $(this).on('click', '#carregaGraficos', function (e) {
         e.preventDefault();
@@ -73,7 +73,7 @@ $(function () {
 
 });
 
-// Função para criar um grafico vazio (OPEX e Composto) 
+// Criar um grafico vazio (OPEX e Composto) 
 function criarGraficoVazio(ctx, titulo) {
     const chart = new Chart(ctx, {
         type: 'bar',
@@ -119,7 +119,7 @@ function criarGraficoVazio(ctx, titulo) {
     return chart;
 }
 
-//Função para criar um grafico vazio para o pareto
+// Criar um grafico vazio para o pareto
 function criarGraficoVazioPareto(ctx, titulo) {
     const chart = new Chart(ctx, {
         type: 'bar',
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
     criarGraficoVazioPareto(ctx3, 'TOP FAILURES');
 });
 
-//FTT opex
+// FTT opex
 function chartOPEX(dataPicker1, dataPicker2, linhaSelecionada) {
     const ctx = document.getElementById('g1');
     const spinner = document.getElementById('loading-spinner'); // Adiciona esta linha
@@ -230,8 +230,7 @@ function chartOPEX(dataPicker1, dataPicker2, linhaSelecionada) {
     });
 }
 
-//FTT composto
-
+// FTT composto
 function chartCOMP(dataPicker1, dataPicker2, linhaSelecionada) {
     const ctx = document.getElementById('g2');
 
@@ -276,7 +275,7 @@ function chartCOMP(dataPicker1, dataPicker2, linhaSelecionada) {
     });
 }
 
-//Pareto
+// Pareto
 function chartPARETO(dataPicker1, dataPicker2, linhaSelecionada) {
             const ctx = document.getElementById('g3');
            
@@ -318,7 +317,7 @@ function chartPARETO(dataPicker1, dataPicker2, linhaSelecionada) {
                 }
             });
         }
-//paynter
+// Paynter
 function payenter(dataPicker1, dataPicker2, linhaSelecionada) {
     $.ajax({
         type: 'POST',
@@ -368,7 +367,7 @@ function payenter(dataPicker1, dataPicker2, linhaSelecionada) {
     });
 }
 
-//Salvar informações no banco
+// Salvar informações no banco
 function saveForm(modalId) {
     const dataPickerX = $('#date-picker').val();
 
@@ -449,7 +448,7 @@ function saveForm(modalId) {
         });
 }
 
-// Função para limpar o formulário
+// Limpar o formulário
 function clearForm(modalId) {
     document.querySelector(`#operacao${modalId}`).value = '';
     document.querySelector(`#falha${modalId}`).value = '';
@@ -461,7 +460,7 @@ function clearForm(modalId) {
     radios.forEach(radio => radio.checked = false);
 }
 
-//mostrar dados no botao Action Plan
+// Mostrar dados no botao Action Plan
 document.addEventListener('DOMContentLoaded', function() {
     //console.log("DOM carregado!");
 
@@ -613,7 +612,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-//Download da tabela do plano de ação
+// Download da tabela do plano de ação
 document.addEventListener('DOMContentLoaded', function () {
     const downloadButton2 = document.getElementById('Download2');
     const telaElement2 = document.getElementById('tela2');
@@ -645,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-//redirecionamento para o andon
+// Redirecionamento para o andon
 document.addEventListener('DOMContentLoaded', function() {
     const andonButton = document.getElementById('andon');
 
@@ -658,7 +657,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("Botão 'andon' não encontrado!");
     }
 });
-
-
- 
 
