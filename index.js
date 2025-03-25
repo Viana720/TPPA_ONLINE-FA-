@@ -316,7 +316,7 @@ function chartPARETO(dataPicker1, dataPicker2, linhaSelecionada) {
                   
                 }
             });
-        }
+        }        
 // Paynter
 function payenter(dataPicker1, dataPicker2, linhaSelecionada) {
     $.ajax({
