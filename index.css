@@ -108,6 +108,8 @@ img {
 #conj {
     display: flex;
     position: relative;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
     width: 100%;
     
 }
@@ -122,6 +124,8 @@ img {
     display: flex;
     width: 100%;
     position: relative;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
     margin-right: 50%;
    
 }
@@ -306,25 +310,4 @@ button {
 }
 
 
-  /*loading*/
-  .loading-spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: rgb(14,74, 114);
-    border-radius: 50%;
-    width: 90px;
-    height: 90px;
-    animation: spin 1s linear infinite;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -15px;
-    margin-left: -15px;
-    background-color: rgba(255, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
   

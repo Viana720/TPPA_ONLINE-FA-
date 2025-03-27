@@ -100,3 +100,4 @@ $media_ftt = ($num_dias > 0) ? round($total_ftt / $num_dias, 2) : 0;
 
 echo json_encode(['ftt_diario' => $ftt_diario, 'media_ftt' => $media_ftt, 'operacao_mais_falhas' => $operacao_mais_falhas]);
 ?>
+
