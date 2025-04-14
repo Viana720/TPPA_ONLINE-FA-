@@ -9,7 +9,7 @@ include_once('../conexao.php');
 $nome_operacao = [];
 switch ($linha) {
     case 'REGIO':
-        $nome_operacao = ['OP140', 'OP135', 'OP130', 'OP120', 'OP110', 'OP100', 'OP80', 'OP70', 'OP60', 'OP50', 'OP40', 'OP30', 'OP20', 'OP10'];
+        $nome_operacao = ['OP140', 'OP135', 'OP130', 'OP120', 'OP110', 'OP100', 'OP80', 'OP70', 'OP60', 'OP50', 'OP40', 'OP30', 'OP25', 'OP20', 'OP10'];
         break;
     case 'GEM':
         $nome_operacao = ['OP80'];

@@ -183,8 +183,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // FTT opex
 function chartOPEX(dataPicker1, dataPicker2, linhaSelecionada) {
     const ctx = document.getElementById('g1');
-    const spinner = document.getElementById('loading-spinner'); // Adiciona esta linha
-    spinner.style.display = 'flex'; // Mostra o spinner
     
     $.ajax({
         type: 'POST',
@@ -224,8 +222,7 @@ function chartOPEX(dataPicker1, dataPicker2, linhaSelecionada) {
         },
         error: function() {
             alert("Erro ao carregar dados. Por favor, tente novamente.");
-            spinner.style.display = 'none'; // Oculta o spinner
-          
+            
         }
     });
 }
@@ -233,6 +230,8 @@ function chartOPEX(dataPicker1, dataPicker2, linhaSelecionada) {
 // FTT composto
 function chartCOMP(dataPicker1, dataPicker2, linhaSelecionada) {
     const ctx = document.getElementById('g2');
+    const spinner = document.getElementById('loading-spinner'); // Adiciona esta linha
+    spinner.style.display = 'flex'; // Mostra o spinner
 
     $.ajax({
         type: 'POST',
@@ -267,10 +266,12 @@ function chartCOMP(dataPicker1, dataPicker2, linhaSelecionada) {
             chart.update();
 
             console.log("Dados recebidos:", data);
+            spinner.style.display = 'none'; // Oculta o spinner
         },
         error: function() {
             
             alert("Erro ao carregar dados. Por favor, tente novamente.");
+           
         }
     });
 }

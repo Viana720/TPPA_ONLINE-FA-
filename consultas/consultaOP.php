@@ -6,39 +6,33 @@ $data_inicial = $_REQUEST['data_inicio'];
 $data_final = $_REQUEST['data_fim'];
 $linha = $_REQUEST['linha'];
 
-// Switch das operações
-$operacoes = [];
+// Switch para definir as operações com tratamento para evitar SQL Injection
+$nome_operacao = [];
 switch ($linha) {
     case 'REGIO':
-        $operacoes = [
-            ['nome' => 'OP70', 'id' => 'AID048611']
-        ];
+        $nome_operacao = ['OP80'];
         break;
     case 'GEM':
-        $operacoes = [
-            ['nome' => 'OP80', 'id' => 'AID046967'],
-        ];
+        $nome_operacao = ['OP80'];
         break;
     case 'FPK':
-        $operacoes = [
-            ['nome' => 'S8S9', 'id' => 'FCTT-001'],
-        ];
+        $nome_operacao = ['S8S9'];
         break;
     default:
+        // Lançar um erro ou retornar um JSON indicando erro é mais adequado
         echo json_encode(['erro' => 'Linha inválida']);
-        exit;
+        exit; // Encerra a execução
 }
 
-// Constrói as cláusulas IN para nome e ID
-$nomes_operacoes = array_column($operacoes, 'nome');
-$ids_operacoes = array_column($operacoes, 'id');
 
-$nomes_string = "'" . implode("','", $nomes_operacoes) . "'";
-$ids_string = "'" . implode("','", $ids_operacoes) . "'";
+$operacoes_string = "'" . implode("','", $nome_operacao) . "'";
 
 $sql = "SELECT 
             TRUNCATE(
-                (SUM(CASE WHEN result = 0 THEN 1 ELSE 0 END) / SUM(CASE WHEN result = 0 OR result = 1 THEN 1 ELSE 0 END)) * 100, 
+                (
+                    (SUM(CASE WHEN result = 0 THEN 1 ELSE 0 END) - SUM(CASE WHEN result = 1 THEN 1 ELSE 0 END)) 
+                    / SUM(CASE WHEN result = 0 THEN 1 ELSE 0 END)
+                ) * 100, 
                 2
             ) AS resultado,
             DATE_FORMAT(test_date, '%d/%m') AS data
@@ -52,20 +46,20 @@ $sql = "SELECT
                     test_steps
                 WHERE 
                     area = 'FA' 
-                    AND linha = '$linha'
-                    AND nome_operacao IN ($nomes_string)
-                    AND id_estacao IN ($ids_string)
+                    AND linha = '$linha'  
+                    AND nome_operacao IN ($operacoes_string) 
                     AND result IN (0, 1) 
                     AND test_date BETWEEN '$data_inicial' AND '$data_final'
             ) AS distinct_results
         GROUP BY 
-            data
-        ORDER BY 
-            STR_TO_DATE(data, '%d/%m')";
+            data";
+
+//echo $sql; // Útil para debug
 
 $sql_query = mysqli_query($conexao, $sql);
 
 if (!$sql_query) {
+    // Trata erros de query SQL
     echo json_encode(['erro' => mysqli_error($conexao)]);
     exit;
 }
@@ -77,7 +71,7 @@ if (mysqli_num_rows($sql_query) > 0) {
     }
     echo json_encode($vetor);
 } else {
-    echo json_encode([]);
+    echo json_encode([]); 
 }
 
 ?>
