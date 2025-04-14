@@ -51,14 +51,14 @@
 
 .btn-custom, #action, #action2, #action3, #carregaGraficos ,#Download, #Download2, #andon, #exibirTabela, #save_form, #save_form2, #save_form3 {
     border: none;
-    background-color: #30698a;
+    background-color: #f89603;;
     transition: all 0.3s ease;
     transform: scale(1);
 }
 
 .btn-custom:hover, #action:hover, #action2:hover, #action3:hover, #Download:hover, #Download2:hover, #andon:hover, #exibirTabela:hover,
 #save_form:hover, #save_form2:hover, #save_form3:hover,  #carregaGraficos:hover{
-    background-color: #ff9b05;
+    background-color: #0ae8a1;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
 }
