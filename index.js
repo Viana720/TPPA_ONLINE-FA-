@@ -209,7 +209,7 @@ function chartOPEX(dataPicker1, dataPicker2, linhaSelecionada) {
                 array_data[indice] = descricao.data;
             });
 
-            chart = criarGraficoVazio(ctx, 'FTT - OPEX | Average: ' + media2 + '%');
+            chart = criarGraficoVazio(ctx, 'FTT - OPEX | Average: ' + media2 + '%'+'         '+'Target: 98.5'+'%');
             chart.data.labels = array_data;
             chart.data.datasets[0].data = array_resultado;
             chart.update();
@@ -247,7 +247,7 @@ function chartCOMP(dataPicker1, dataPicker2, linhaSelecionada) {
             }
 
             // Adiciona o nome da operação e a média do FTT ao título
-            const titulo = `FTT - ${data.operacao_mais_falhas} | Average: ${data.media_ftt}%`;
+            const titulo = `FTT - ${data.operacao_mais_falhas} | Average: ${data.media_ftt}%         Target: 98.5%`;
 
             // Inicializa o gráfico com a função criarGraficoVazio
             chart = criarGraficoVazio(ctx, titulo);
