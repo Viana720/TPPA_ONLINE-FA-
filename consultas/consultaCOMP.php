@@ -17,7 +17,7 @@ switch ($linha) {
         $nome_operacao = ['S8S9'];
         break;
     case 'STELLANTIS':
-        $nome_operacao = ['OPS3', 'OPS4', 'OPS5', 'OPS6', 'OPS7', 'OPS8'];
+        $nome_operacao = ['OPS3', 'OPS4', 'OPS5', 'OPS6A', 'OPS7', 'OPS8']; 
         break;
     default:
         echo json_encode(['erro' => 'Linha inválida']);
@@ -49,7 +49,7 @@ if (mysqli_num_rows($result_max_falhas) == 0) {
     echo json_encode([]);
     exit;
 }
-
+// validações de sistema/ variavel
 $row_max_falhas = mysqli_fetch_assoc($result_max_falhas);
 $operacao_mais_falhas = $row_max_falhas['nome_operacao'];
 

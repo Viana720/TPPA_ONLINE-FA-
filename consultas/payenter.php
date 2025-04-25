@@ -13,8 +13,11 @@ switch ($linha) {
         $nome_operacao = ['OP80'];
         break;
     case 'GEM':
-        $nome_operacao = ['OP80'];
+        $nome_operacao = ['OP80',];
         break;
+    case 'STELLANTIS':
+            $nome_operacao = ['OPS3', 'OPS4', 'OPS5', 'OPS6A', 'OPS7', 'OPS8'];
+            break;
     case 'FPK':
         $nome_operacao = ['S8S9'];
         break;
@@ -23,7 +26,7 @@ switch ($linha) {
         echo json_encode(['erro' => 'Linha inválida']);
         exit; 
 }
-
+// Eu preciso de voce aqui 
 // Converte o array de operações para uma string formatada para o IN
 $operacoes_string = "'" . implode("','", $nome_operacao) . "'";
 
@@ -56,5 +59,5 @@ if (mysqli_num_rows($sql_query) > 0) {
     echo json_encode($vetor);
 } else {
 }
-
+// Eu nao quero ma
 ?>

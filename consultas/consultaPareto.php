@@ -12,8 +12,11 @@ switch ($linha) {
         $nome_operacao = ['OP140', 'OP135', 'OP130', 'OP120', 'OP110', 'OP100', 'OP80', 'OP70', 'OP60', 'OP50', 'OP40', 'OP30', 'OP25', 'OP20', 'OP10'];
         break;
     case 'GEM':
-        $nome_operacao = ['OP80'];
+        $nome_operacao = ['OP80', 'OP70'];
         break;
+    case 'STELLANTIS':
+            $nome_operacao = ['OPS3', 'OPS4', 'OPS5', 'OPS6A', 'OPS7', 'OPS8']; // pendente algumas dessas operações
+            break;
     case 'FPK':
         $nome_operacao = ['S8S9'];
         break;
