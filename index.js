@@ -25,7 +25,7 @@ let linhaSelecionada = null;
 
 $(document).on('click', '.dropdown-item', function (e) {
     e.preventDefault();
-    linhaSelecionada = $(this).data('value'); // Captura o valor exato
+    linhaSelecionada = $(this).data('value'); // Captura o valor 
     $('#dropdownMenuButton').text(`${linhaSelecionada}`); // Atualiza o texto do botão
 });
 

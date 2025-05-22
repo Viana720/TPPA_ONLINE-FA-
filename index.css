@@ -137,11 +137,11 @@
 }
 
 #cancelarEdicao:hover{
-    background-color: #3adabf;   
+    background-color: #f84626;   
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
 }
-/*#f84626;*/
+
 /*Botao para download de imagem*/
 .btn img{
     width: 20px;
@@ -190,7 +190,7 @@ canvas {
     background-color: white;
 } 
 
-/**/
+
 
 #card1 {
     height: 400px       ;
