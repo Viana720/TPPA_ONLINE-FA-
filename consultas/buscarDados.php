@@ -17,7 +17,7 @@ if (isset($_POST['data']) && isset($_POST['linha'])) {
         die(json_encode(["error" => "Erro no formato da data. Formato esperado: YYYY-MM-DD"])); // Retorna JSON em caso de erro de data
     }
 
-    $query = "SELECT operacao, falha, causa, acao, responsavel, dataprevista, status
+    $query = "SELECT id, operacao, falha, causa, acao, responsavel, dataprevista, status
               FROM plano_de_acao
               WHERE linha = '$linha' AND dataRegistro = '$data_formatada'";
 

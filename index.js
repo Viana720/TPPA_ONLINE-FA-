@@ -20,7 +20,7 @@
 });
 
 
-// Selecionar uma linha
+/////////////////////////////////////////////////////////////////////////////Selecionar uma linha////////////////////////////////////////////////////////////////////////////////////
 let linhaSelecionada = null;
 
 $(document).on('click', '.dropdown-item', function (e) {
@@ -29,7 +29,7 @@ $(document).on('click', '.dropdown-item', function (e) {
     $('#dropdownMenuButton').text(`${linhaSelecionada}`); // Atualiza o texto do botão
 });
 
-// Gerar os graficos
+/////////////////////////////////////////////////////////////////////////////Gerar os graficos////////////////////////////////////////////////////////////////////////////////////////
 $(function () {
     $(this).on('click', '#carregaGraficos', function (e) {
         e.preventDefault();
@@ -42,7 +42,7 @@ $(function () {
                 icon: "error",
                 iconColor: "#D50D0D",
                 background: "#F0AFAF",
-                title: "Please select the dates!",
+                title: "Por favor, selecione as datas!",
                 showConfirmButton: false,
                 timer: 1500
             });// Alerta de erro
@@ -51,7 +51,7 @@ $(function () {
                 icon: "error",
                 iconColor: "#D50D0D",
                 background: "#F0AFAF",
-                title: "Please select the process!",
+                title: "Por favor, selecione o processo!",
                 showConfirmButton: false,
                 timer: 1500
             });// Alerta de erro
@@ -60,7 +60,7 @@ $(function () {
                 icon: "success",
                 iconColor:"#0ae8a1",
                 background: "#B8FFFA",
-                title: "Generating charts!",
+                title: "Gerando os gráficos!",
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -73,7 +73,7 @@ $(function () {
 
 });
 
-// Criar um grafico vazio (OPEX e Composto) 
+///////////////////////////////////////////////////////////////////Criar um grafico vazio (OPEX e Composto)///////////////////////////////////////////////////////////////////////// 
 function criarGraficoVazio(ctx, titulo) {
     const chart = new Chart(ctx, {
         type: 'bar',
@@ -119,7 +119,7 @@ function criarGraficoVazio(ctx, titulo) {
     return chart;
 }
 
-// Criar um grafico vazio para o pareto
+//////////////////////////////////////////////////////////////////////Criar um grafico vazio para o pareto/////////////////////////////////////////////////////////////////////////
 function criarGraficoVazioPareto(ctx, titulo) {
     const chart = new Chart(ctx, {
         type: 'bar',
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
     criarGraficoVazioPareto(ctx3, 'TOP FAILURES');
 });
 
-// FTT opex
+//////////////////////////////////////////////////////////////////////////////////FTT opex/////////////////////////////////////////////////////////////////////////////////////////
 function chartOPEX(dataPicker1, dataPicker2, linhaSelecionada) {
     const ctx = document.getElementById('g1');
     
@@ -227,7 +227,7 @@ function chartOPEX(dataPicker1, dataPicker2, linhaSelecionada) {
     });
 }
 
-// FTT composto
+/////////////////////////////////////////////////////////////////////////////////FTT composto//////////////////////////////////////////////////////////////////////////////////////
 function chartCOMP(dataPicker1, dataPicker2, linhaSelecionada) {
     const ctx = document.getElementById('g2');
     const spinner = document.getElementById('loading-spinner'); // Adiciona esta linha
@@ -276,7 +276,7 @@ function chartCOMP(dataPicker1, dataPicker2, linhaSelecionada) {
     });
 }
 
-// Pareto
+//////////////////////////////////////////////////////////////////////////////////////Pareto///////////////////////////////////////////////////////////////////////////////////////
 function chartPARETO(dataPicker1, dataPicker2, linhaSelecionada) {
             const ctx = document.getElementById('g3');
            
@@ -318,7 +318,7 @@ function chartPARETO(dataPicker1, dataPicker2, linhaSelecionada) {
                 }
             });
         }        
-// Paynter
+//////////////////////////////////////////////////////////////////////////////////////Paynter//////////////////////////////////////////////////////////////////////////////////////
 function payenter(dataPicker1, dataPicker2, linhaSelecionada) {
     $.ajax({
         type: 'POST',
@@ -368,7 +368,7 @@ function payenter(dataPicker1, dataPicker2, linhaSelecionada) {
     });
 }
 
-// Salvar informações no banco
+/////////////////////////////////////////////////////////////////////////////Salvar informações no banco////////////////////////////////////////////////////////////////////////////
 function saveForm(modalId) {
     const dataPickerX = $('#date-picker').val();
 
@@ -377,7 +377,7 @@ function saveForm(modalId) {
             icon: "error",
             iconColor: "#D50D0D",
             background: "#F0AFAF",
-            title: "Please select a process and fill out the form!",
+            title: "Por favor, selecione um processo!",
             showConfirmButton: false,
             timer: 1500
         });
@@ -397,7 +397,7 @@ function saveForm(modalId) {
             icon: "error",
             iconColor: "#D50D0D",
             background: "#F0AFAF",
-            title: "Please fill in all the fields before saving!",
+            title: "Por favor, preencha todos os campos!",
             showConfirmButton: false,
             timer: 1500
         });
@@ -442,14 +442,14 @@ function saveForm(modalId) {
                 icon: "error",
                 iconColor: "#D50D0D",
                 background: "#F0AFAF",
-                title: " Error saving data. Please try again!",
+                title: " Erro ao salvar, por favor tente novamente!",
                 showConfirmButton: false,
                 timer: 1500
             });
         });
 }
 
-// Limpar o formulário
+////////////////////////////////////////////////////////////////////////////////Limpar o formulário/////////////////////////////////////////////////////////////////////////////////
 function clearForm(modalId) {
     document.querySelector(`#operacao${modalId}`).value = '';
     document.querySelector(`#falha${modalId}`).value = '';
@@ -461,117 +461,219 @@ function clearForm(modalId) {
     radios.forEach(radio => radio.checked = false);
 }
 
-// Mostrar dados no botao Action Plan
+////////////////////////////////////////////////////////////////////// Mostrar dados no botao Action Plan////////////////////////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', function() {
-    //console.log("DOM carregado!");
+    const DOM = {
+        botaoExibirTabela: document.getElementById('exibirTabela'),
+        modalTabelaElement: document.getElementById('modalTabela'),
+        tabelaDados: document.getElementById('tabelaDados'),
+        tabelaExibicao: document.getElementById('tabelaExibicao'),
+        formEdicao: document.getElementById('formEdicao'),
+        botaoSalvarEdicao: document.getElementById('salvarEdicao'),
+        botaoCancelarEdicao: document.getElementById('cancelarEdicao'),
+        editIdInput: document.getElementById('editId'),
+        editOperacaoInput: document.getElementById('editOperacao'),
+        editFalhaInput: document.getElementById('editFalha'),
+        editCausaInput: document.getElementById('editCausa'),
+        editAcaoInput: document.getElementById('editAcao'),
+        editResponsavelInput: document.getElementById('editResponsavel'),
+        editDataprevistaInput: document.getElementById('editDataprevista'),
+        editStatusSelect: document.getElementById('editStatus'),
+        datePicker: document.getElementById('date-picker'),
+        dropdownMenuButton: document.getElementById('dropdownMenuButton')
+    };
 
-    const botao = document.getElementById('exibirTabela');
-    const modalTabelaElement = document.getElementById('modalTabela'); // Obtém o elemento do modal
-    const myModal = new bootstrap.Modal(modalTabelaElement); // Instancia o modal APENAS UMA VEZ
+    const myModal = new bootstrap.Modal(DOM.modalTabelaElement);
+    let linhaSelecionadaParaEdicao = null;
 
+    // Helper para exibir alertas com SweetAlert2
+    function exibirAlerta(icon, title, text, background = "#B8FFFA", showConfirmButton = false, timer = 1500) {
+        Swal.fire({ icon, title, text, background, showConfirmButton, timer });
+    }
 
-    if (botao) {
-        botao.addEventListener('click', function() {
-            console.log("Botão clicado!");
-
-            const data = document.getElementById('date-picker').value;
-            const linha = document.getElementById('dropdownMenuButton').textContent.trim();
-
-            if (!data || linha === "Line") {
-                Swal.fire({
-                    icon: "info",
-                    iconColor:"#ABF5FD",
-                    background: "#EFEA5E",
-                    title: "Warning, date and process are not selected!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                return;
-            }
-
-            fetch('consultas/buscarDados.php', {
+    async function buscarDados(url, bodyData) {
+        try {
+            const resposta = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'data=' + data + '&linha=' + linha
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Dados recebidos:", data);
-
-                if (data.error) {
-                    console.error("Erro do PHP:", data.error);
-                    alert(data.error);
-                    return;
-                }
-
-                const tabelaDados = document.getElementById('tabelaDados');
-                tabelaDados.innerHTML = '';
-
-                let dataArray = data;
-                if (!Array.isArray(data)) {
-                    if (typeof data === 'object' && data !== null) {
-                        const keys = Object.keys(data);
-                        if (keys.length === 1 && Array.isArray(data[keys[0]])) {
-                            dataArray = data[keys[0]];
-                        } else if(keys.length === 0){
-                            console.warn("Nenhum dado retornado do banco de dados.");
-                            const row = tabelaDados.insertRow();
-                            const cell = row.insertCell();
-                            cell.colSpan = 7;
-                            cell.textContent = "Data has not been registered yet!";
-                            myModal.show();
-                            return;
-                        } else{
-                          console.error("Formato de dados inesperado:", data);
-                          return;
-                        }
-                    } else {
-                        console.error("Formato de dados inválido:", data);
-                        return;
-                    }
-                }
-
-                if (dataArray && dataArray.length > 0) {
-                    dataArray.forEach(item => {
-                        const row = tabelaDados.insertRow();
-                        const cell1 = row.insertCell();
-                        const cell2 = row.insertCell();
-                        const cell3 = row.insertCell();
-                        const cell4 = row.insertCell();
-                        const cell5 = row.insertCell();
-                        const cell6 = row.insertCell();
-                        const cell7 = row.insertCell();
-
-                        cell1.textContent = item.operacao;
-                        cell2.textContent = item.falha;
-                        cell3.textContent = item.causa;
-                        cell4.textContent = item.acao;
-                        cell5.textContent = item.responsavel;
-                        cell6.textContent = item.dataprevista;
-                        cell7.textContent = item.status;
-                    });
-                } else {
-                    const row = tabelaDados.insertRow();
-                    const cell = row.insertCell();
-                    cell.colSpan = 7;
-                    cell.textContent = "Data has not been registered yet!";
-                }
-
-                myModal.show(); // Mostra o modal (instanciado apenas uma vez)
-            })
-            .catch(error => {
-                console.error('Erro na requisição:', error);
-                alert('Ocorreu um erro ao buscar os dados.');
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: bodyData,
             });
+            const dados = await resposta.json();
+            if (dados.error) {
+                console.error("Erro do PHP:", dados.error);
+                exibirAlerta("error", "Erro no Servidor", dados.error);
+                return null;
+            }
+            return dados;
+        } catch (erro) {
+            console.error('Erro na Requisição:', erro);
+            exibirAlerta("error", "Erro de Rede", "Ocorreu um erro ao se comunicar com o servidor.");
+            return null;
+        }
+    }
+
+    function renderizarTabela(dados, elementoCorpoTabela) {
+        elementoCorpoTabela.innerHTML = '';
+
+        if (!dados || dados.length === 0) {
+            const linha = elementoCorpoTabela.insertRow();
+            const celula = linha.insertCell();
+            celula.colSpan = 9;
+            celula.textContent = "Nenhum dado foi registrado ainda!";
+            return;
+        }
+
+        const colunasDados = ['operacao', 'falha', 'causa', 'acao', 'responsavel', 'dataprevista', 'status'];
+
+        dados.forEach(item => {
+            const linha = elementoCorpoTabela.insertRow();
+            linha.dataset.id = item.id;
+
+            colunasDados.forEach(chave => {
+                const celula = linha.insertCell();
+                celula.textContent = item[chave];
+            });
+
+            // Adicionar Botão de Edição
+            const celulaEdicao = linha.insertCell();
+            const botaoEditar = document.createElement('button');
+            botaoEditar.className = 'btn btn-sm btn-primary editar-linha botao-editar-customizado';
+            botaoEditar.innerHTML = '<img src="./assets/img/Editar.svg" alt="Editar" style="width: 16px; height: 16px;">';
+            botaoEditar.dataset.id = item.id;
+            celulaEdicao.appendChild(botaoEditar);
+
+            // Adicionar Botão de Excluir
+            const celulaExcluir = linha.insertCell();
+            const botaoExcluir = document.createElement('button');
+            botaoExcluir.className = 'btn btn-sm btn-danger deletar-linha botao-deletar-customizado';
+            botaoExcluir.innerHTML = '<img src="./assets/img/delete.svg" alt="Excluir" style="width: 16px; height: 16px; align-items: center; justify-content: center">';
+            botaoExcluir.dataset.id = item.id;
+            celulaExcluir.appendChild(botaoExcluir);
         });
+    }
+
+    async function lidarComCliqueExibirTabela() {
+        const { datePicker, dropdownMenuButton, tabelaDados, tabelaExibicao, formEdicao } = DOM;
+        const data = datePicker.value;
+        const linha = dropdownMenuButton.textContent.trim();
+
+        if (!data || linha === "Line") {
+            exibirAlerta("info", "Aviso, data e processo não selecionados!", "", "#EFEA5E", false, 1500);
+            return;
+        }
+
+        const resultado = await buscarDados('consultas/buscarDados.php', `data=${data}&linha=${linha}`);
+        if (resultado) {
+            const arrayDados = Array.isArray(resultado) ? resultado : (resultado && Object.values(resultado)[0]);
+            renderizarTabela(arrayDados || [], tabelaDados);
+            tabelaExibicao.style.display = 'table';
+            formEdicao.style.display = 'none';
+            myModal.show();
+        }
+    }
+
+    function preencherFormularioEdicao(linha) {
+        linhaSelecionadaParaEdicao = linha;
+        const { editIdInput, editOperacaoInput, editFalhaInput, editCausaInput, editAcaoInput, editResponsavelInput, editDataprevistaInput, editStatusSelect } = DOM;
+
+        editIdInput.value = linha.dataset.id;
+        editOperacaoInput.value = linha.cells[0].textContent;
+        editFalhaInput.value = linha.cells[1].textContent;
+        editCausaInput.value = linha.cells[2].textContent;
+        editAcaoInput.value = linha.cells[3].textContent;
+        editResponsavelInput.value = linha.cells[4].textContent;
+        editDataprevistaInput.value = linha.cells[5].textContent;
+        editStatusSelect.value = linha.cells[6].textContent;
+
+        DOM.tabelaExibicao.style.display = 'none';
+        DOM.formEdicao.style.display = 'block';
+    }
+
+    async function lidarComCliqueBotaoDeletar(idParaDeletar) {
+        const resultadoConfirmacao = await Swal.fire({
+            title: 'Você tem certeza?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3adabf',
+            cancelButtonColor: '#f84626',
+            confirmButtonText: 'Sim, excluir!'
+        });
+
+        if (resultadoConfirmacao.isConfirmed) {
+            const resultadoExclusao = await buscarDados('consultas/deletarDados.php', `id=${idParaDeletar}`);
+            if (resultadoExclusao && resultadoExclusao.success) {
+                exibirAlerta('success', 'Excluído!', 'Os dados foram excluídos.');
+                const linhaParaDeletar = DOM.tabelaDados.querySelector(`tr[data-id="${idParaDeletar}"]`);
+                linhaParaDeletar?.remove(); // Operador de encadeamento opcional para remover
+                if (DOM.tabelaDados.rows.length === 0) {
+                    renderizarTabela([], DOM.tabelaDados);
+                }
+            }
+        }
+    }
+
+    async function lidarComCliqueSalvarEdicao() {
+        const { editIdInput, editOperacaoInput, editFalhaInput, editCausaInput, editAcaoInput, editResponsavelInput, editDataprevistaInput, editStatusSelect } = DOM;
+        const id = editIdInput.value;
+        const operacao = editOperacaoInput.value;
+        const falha = editFalhaInput.value;
+        const causa = editCausaInput.value;
+        const acao = editAcaoInput.value;
+        const responsavel = editResponsavelInput.value;
+        const dataprevista = editDataprevistaInput.value;
+        const status = editStatusSelect.value;
+
+        const corpo = `id=${id}&operacao=${operacao}&falha=${falha}&causa=${causa}&acao=${acao}&responsavel=${responsavel}&dataprevista=${dataprevista}&status=${status}`;
+
+        const resultadoAtualizacao = await buscarDados('consultas/atualizarDados.php', corpo);
+
+        if (resultadoAtualizacao && resultadoAtualizacao.success) {
+            exibirAlerta("success", "Dados atualizados com sucesso!", "", "#B8FFFA", false, 1500);
+            if (linhaSelecionadaParaEdicao) {
+                linhaSelecionadaParaEdicao.cells[0].textContent = operacao;
+                linhaSelecionadaParaEdicao.cells[1].textContent = falha;
+                linhaSelecionadaParaEdicao.cells[2].textContent = causa;
+                linhaSelecionadaParaEdicao.cells[3].textContent = acao;
+                linhaSelecionadaParaEdicao.cells[4].textContent = responsavel;
+                linhaSelecionadaParaEdicao.cells[5].textContent = dataprevista;
+                linhaSelecionadaParaEdicao.cells[6].textContent = status;
+                DOM.tabelaExibicao.style.display = 'table';
+                DOM.formEdicao.style.display = 'none';
+                linhaSelecionadaParaEdicao = null;
+            }
+        }
+    }
+
+    function lidarComCliqueCancelarEdicao() {
+        DOM.tabelaExibicao.style.display = 'table';
+        DOM.formEdicao.style.display = 'none';
+        linhaSelecionadaParaEdicao = null;
+    }
+
+    // Inicialização dos Event Listeners
+    if (DOM.botaoExibirTabela) {
+        DOM.botaoExibirTabela.addEventListener('click', lidarComCliqueExibirTabela);
     } else {
         console.error("Botão 'exibirTabela' não encontrado!");
     }
+
+    DOM.tabelaDados.addEventListener('click', function(event) {
+        const botaoEditar = event.target.closest('.editar-linha');
+        const botaoDeletar = event.target.closest('.deletar-linha');
+
+        if (botaoEditar) {
+            preencherFormularioEdicao(botaoEditar.closest('tr'));
+        } else if (botaoDeletar) {
+            lidarComCliqueBotaoDeletar(botaoDeletar.dataset.id);
+        }
+    });
+
+    DOM.botaoSalvarEdicao?.addEventListener('click', lidarComCliqueSalvarEdicao);
+    DOM.botaoCancelarEdicao?.addEventListener('click', lidarComCliqueCancelarEdicao);
 });
 
-// Download da imagem da dashboard como arquivo em  PDF
+///////////////////////////////////////////////////////////// Download da imagem da dashboard como arquivo em  PDF///////////////////////////////////////////////////////////////////
    document.addEventListener('DOMContentLoaded', function () {
     const downloadButton = document.getElementById('Download');
     const telaElement = document.getElementById('tela');
@@ -584,7 +686,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const pdfWidth = telaWidth;
             const pdfHeight = telaHeight;
 
-            const scale = 1;
+            const scale = 6;
 
             const opt = {
                 margin: 0,
@@ -613,13 +715,44 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Download da tabela do plano de ação
+//////////////////////////////////////////////////////////////////////Download da tabela do plano de ação///////////////////////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', function () {
     const downloadButton2 = document.getElementById('Download2');
-    const telaElement2 = document.getElementById('tela2');
+    const telaElement2 = document.getElementById('tela2'); // O elemento que você quer capturar (seu modal-content)
+    const tabelaExibicao = document.getElementById('tabelaExibicao'); // **Adicionado para acessar a tabela**
 
-    if (downloadButton2 && telaElement2) {
-        downloadButton2.addEventListener('click', function () {
+    // Referências aos botões que você quer ocultar *apenas na captura do PDF*
+    const closeButton = document.getElementById('fechar');
+    const andonButton = document.getElementById('andon');
+    // O downloadButton2 já está referenciado, e ele também será ocultado temporariamente
+
+    // **IMPORTANTE: Adicionado tabelaExibicao à condição de verificação**
+    if (downloadButton2 && telaElement2 && closeButton && andonButton && tabelaExibicao) {
+        downloadButton2.addEventListener('click', async function () { // Adicionado 'async' aqui para usar 'await'
+            // 1. Ocultar os botões *antes* de iniciar a captura
+            closeButton.style.display = 'none';
+            andonButton.style.display = 'none';
+            downloadButton2.style.display = 'none';
+
+            // --- INÍCIO DA LÓGICA PARA GARANTIR A DATA COMPLETA ---
+            const targetDateCells = tabelaExibicao.querySelectorAll('td:nth-child(6)'); // Seleciona todas as células da 6ª coluna (Target Date)
+            const originalTargetDateCellMinWidth = [];
+            const originalTargetDateCellWhiteSpace = [];
+
+            targetDateCells.forEach(cell => {
+                // Guarda os estilos originais para restaurar depois
+                originalTargetDateCellMinWidth.push(cell.style.minWidth);
+                originalTargetDateCellWhiteSpace.push(cell.style.whiteSpace);
+
+                // Aplica os estilos para garantir a exibição completa da data
+                cell.style.minWidth = '95px'; // Uma largura mínima que deve caber "AAAA-MM-DD" (ajuste se precisar de mais espaço)
+                cell.style.whiteSpace = 'nowrap'; // Impede que a data quebre a linha
+            });
+
+            // Adicionado um pequeno delay para que os estilos temporários sejam aplicados antes do html2canvas
+            await new Promise(resolve => setTimeout(resolve, 100));
+            // --- FIM DA LÓGICA PARA GARANTIR A DATA COMPLETA ---
+
             const opt2 = {
                 margin: 10,
                 filename: 'Action_Plan.pdf',
@@ -628,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     quality: 0.98
                 },
                 html2canvas: {
-                    scale: 1
+                    scale: 5 // Mantido em 5 como estava na sua original
                 },
                 jsPDF: {
                     unit: 'mm',
@@ -637,15 +770,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             };
 
-            html2pdf().from(telaElement2).set(opt2).save();
+            // 2. Chamar html2pdf para gerar o PDF
+            // Use .then() para reexibir os botões APÓS a conclusão da geração
+            html2pdf().from(telaElement2).set(opt2).save().then(function() {
+                // 3. Reexibir os botões *depois* que o PDF for gerado/salvo
+                closeButton.style.display = '';
+                andonButton.style.display = '';
+                downloadButton2.style.display = 'flex'; // Mantido 'flex' como sugerido anteriormente
+
+                // --- INÍCIO DA RESTAURAÇÃO DA LÓGICA DA DATA ---
+                // Restaurar largura e white-space das células da data
+                targetDateCells.forEach((cell, i) => {
+                    cell.style.minWidth = originalTargetDateCellMinWidth[i];
+                    cell.style.whiteSpace = originalTargetDateCellWhiteSpace[i];
+                });
+                // --- FIM DA RESTAURAÇÃO DA LÓGICA DA DATA ---
+            });
         });
     } else {
-        if (!downloadButton2) console.error("Botão de download não encontrado!");
-        if (!telaElement2) console.error("Elemento 'tela' não encontrado!");
+        // Mensagens de erro mais específicas para depuração
+        if (!downloadButton2) console.error("Botão de download ('Download2') não encontrado!");
+        if (!telaElement2) console.error("Elemento principal para captura ('tela2') não encontrado!");
+        if (!tabelaExibicao) console.error("Tabela ('tabelaExibicao') não encontrada!"); // Adicionado erro para tabela
+        if (!closeButton) console.error("Botão 'Fechar' ('fechar') não encontrado!");
+        if (!andonButton) console.error("Botão 'Andon' ('andon') não encontrado!");
     }
 });
 
-// Redirecionamento para o andon
+//////////////////////////////////////////////////////////////////////// Redirecionamento para o andon /////////////////////////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', function() {
     const andonButton = document.getElementById('andon');
 
@@ -657,5 +809,5 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error("Botão 'andon' não encontrado!");
     }
+    
 });
-

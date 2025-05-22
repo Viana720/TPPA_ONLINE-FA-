@@ -10,13 +10,16 @@ $linha = $_REQUEST['linha'];
 $nome_operacao = [];
 switch ($linha) {
     case 'REGIO':
-        $nome_operacao = ['OP80'];
+        $nome_operacao = ['OP70'];
         break;
     case 'GEM':
         $nome_operacao = ['OP80'];
         break;
     case 'FPK':
         $nome_operacao = ['S8S9'];
+        break;
+    case 'STELLANTIS':
+        $nome_operacao = ['OPS7A'];
         break;
     default:
         // Lançar um erro ou retornar um JSON indicando erro é mais adequado
@@ -30,8 +33,8 @@ $operacoes_string = "'" . implode("','", $nome_operacao) . "'";
 $sql = "SELECT 
             TRUNCATE(
                 (
-                    (SUM(CASE WHEN result = 0 THEN 1 ELSE 0 END) - SUM(CASE WHEN result = 1 THEN 1 ELSE 0 END)) 
-                    / SUM(CASE WHEN result = 0 THEN 1 ELSE 0 END)
+                    (SUM(CASE WHEN result = 0 THEN 1 ELSE 0 END)) 
+                    / SUM(CASE WHEN result = 0 OR result = 1 THEN 1 ELSE 0 END)
                 ) * 100, 
                 2
             ) AS resultado,

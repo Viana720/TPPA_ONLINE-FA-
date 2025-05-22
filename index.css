@@ -49,15 +49,16 @@
 }
 
 
-.btn-custom, #action, #action2, #action3, #carregaGraficos ,#Download, #Download2, #andon, #exibirTabela{
+.btn-custom, #action, #action2, #action3, #carregaGraficos ,#Download, #Download2, #andon, #EditarBtn, #exibirTabela{
     border: none;
     background-color: #f89603;;
     transition: all 0.3s ease;
     transform: scale(1);
 }
 
-.btn-custom:hover, #action:hover, #action2:hover, #action3:hover, #Download:hover, #Download2:hover, #andon:hover, #exibirTabela:hover,
-#save_form:hover, #save_form2:hover, #save_form3:hover,  #carregaGraficos:hover{
+.btn-custom:hover, #action:hover, #action2:hover, #action3:hover, #Download:hover, #Download2:hover, #andon:hover,#editOperacao:hover, #editFalha:hover, #editCausa:hover,
+#editAcao:hover, #editResponsavel:hover, #editDataprevista:hover, #editStatus:hover, #exibirTabela:hover,#save_form:hover, #save_form2:hover, #save_form3:hover,
+#carregaGraficos:hover{
     background-color: #0ae8a1;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
@@ -92,7 +93,55 @@
     transform: scale(1.05);
 }
 
+/*Botões de edição do modal*/
 
+.botao-editar-customizado{
+    border: none;
+    background-color: #23bcf8;
+}
+
+.botao-editar-customizado:hover,.botao-deletar-customizado:hover{
+    background-color: #0ae8a1;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+
+}
+
+.botao-deletar-customizado{
+    border: none;
+    color: #f84626;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+
+#salvarEdicao{
+    border: none;
+    background-color: #0ae8a1;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+#salvarEdicao:hover{
+    background-color: #0ae8a1;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+#cancelarEdicao{
+    border: none;
+    background-color: #f84626;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+#cancelarEdicao:hover{
+    background-color: #3adabf;   
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+/*#f84626;*/
 /*Botao para download de imagem*/
 .btn img{
     width: 20px;

@@ -8,10 +8,10 @@ $linha = $_REQUEST['linha'];
 $nome_operacao = [];
 switch ($linha) {
     case 'REGIO':
-        $nome_operacao = ['OP140', 'OP135', 'OP130', 'OP120', 'OP110', 'OP100', 'OP80', 'OP70', 'OP60', 'OP50', 'OP40', 'OP30', 'OP25','OP20', 'OP10'];
+        $nome_operacao = ['OP140', 'OP135', 'OP130', 'OP120', 'OP110', 'OP100', 'OP80', 'OP70', 'OP70B', 'OP60', 'OP50', 'OP40', 'OP30', 'OP25','OP20', 'OP10'];
         break;
     case 'GEM':
-        $nome_operacao = ['OP90', 'OP80', 'OP75', 'OP70', 'OP60', 'OP50', 'OP40', 'OP30', 'OP20', 'OP10', 'OP05' ];
+        $nome_operacao = ['OP90', 'OP80', 'OP75', 'OP70', 'OP60B','OP60A', 'OP50', 'OP40', 'OP30', 'OP20B', 'OP10', 'OP05' ];
         break;
     case 'FPK':
         $nome_operacao = ['S8S9'];
@@ -95,7 +95,7 @@ while ($resultado = mysqli_fetch_assoc($result_ftt_por_dia)) {
     $total_ftt += $resultado['ftt'];
     $num_dias++;
 }
-
+// 
 $media_ftt = ($num_dias > 0) ? round($total_ftt / $num_dias, 2) : 0;
 
 echo json_encode(['ftt_diario' => $ftt_diario, 'media_ftt' => $media_ftt, 'operacao_mais_falhas' => $operacao_mais_falhas]);
