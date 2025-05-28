@@ -10,7 +10,7 @@ $linha = $_REQUEST['linha'];
 $nome_operacao = [];
 switch ($linha) {
     case 'REGIO':
-        $nome_operacao = ['OP70'];
+        $nome_operacao = ['OP80'];
         break;
     case 'GEM':
         $nome_operacao = ['OP80'];
@@ -19,7 +19,7 @@ switch ($linha) {
         $nome_operacao = ['S8S9'];
         break;
     case 'STELLANTIS':
-        $nome_operacao = ['OPS7A'];
+        $nome_operacao = ['OPS7B'];
         break;
     default:
         // Lançar um erro ou retornar um JSON indicando erro é mais adequado

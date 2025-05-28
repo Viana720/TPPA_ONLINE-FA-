@@ -217,12 +217,36 @@ canvas {
     box-sizing: border-box;
 }
 
+/*tabela plano de ação*/
 #card4 {
     height: 350px;
     width: 800px;
     margin-top: 50px;
     margin: 10px;
     box-sizing: border-box;
+    border: none;
+    position: relative;
+    overflow: hidden; /* Importante para o conteúdo não vazar do card */
+}
+
+#card4 .card-img-overlay {
+    background-color: rgb(14, 74, 114);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1.25rem; /* Padding padrão do Bootstrap para card-img-overlay: 20px de cada lado (1.25rem * 16px/rem) */
+    
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Oculta overflow do próprio overlay */
+}
+
+#card4 .card-img-overlay h5.card-title {
+    flex-shrink: 0;
+    margin-bottom: 0.5rem;
+    color: var(--bs-card-title-color, #f8fafc);
 }
 
 input {
@@ -314,24 +338,24 @@ button {
 
 /*Action*/
 #action {
-    width: 50%;
-    height: 85px;
-    margin-left: 150px;
-    margin-bottom: 5px; /* Espaçamento abaixo do botão 1 */
+    width: 17%;
+    height: 38px;
+   /* margin-left: 150px;*/
+   /* margin-bottom: 5px; /* Espaçamento abaixo do botão 1 */
 }
 
 #action2 {
-    width: 50%;
-    height: 85px;
-    margin-left: 150px;
-    margin-bottom: 5px; /* Espaçamento abaixo do botão 2 */
+    width: 17%;
+    height: 38px;
+   /* margin-left: 150px;*/
+   /* margin-bottom: 5px; /* Espaçamento abaixo do botão 2 */
 }
 
 #action3 {
-    width: 50%;
-    height: 85px;
-    margin-left: 150px;
-    margin-bottom: 0; /* Sem necessidade de margem abaixo do último botão */
+    width: 17%;
+    height: 38px;
+   /* margin-left: 150px;*/
+   /* margin-bottom: 0; /* Sem necessidade de margem abaixo do último botão */
 }
 
 /*alerta*/
@@ -365,4 +389,76 @@ button {
 }
 
 
-  
+/* --- Tablea do Action Plan --- */
+.table-container-for-action {
+    flex-grow: 1; 
+    overflow-y: auto; 
+   
+
+    margin-top: 0.5rem; 
+    
+}
+
+
+.table-container-for-action {
+    flex-grow: 1; 
+    overflow-y: auto; 
+    margin-top: 0.5rem; 
+}
+    
+
+#tabelaExibicao2 {
+   
+    min-width: calc(800px - (1.25rem * 2) - 10px); 
+    width: 100%; 
+    
+    table-layout: fixed; 
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+#tabelaExibicao2 thead {
+    position: sticky;
+    top: 0;
+    background-color:rgb(14, 74, 114);
+    z-index: 1;
+    color: #f8fafc;
+}
+
+#tabelaExibicao2 th{
+    padding: 0.3rem 0.5rem;
+    font-size: 0.65rem; 
+    vertical-align: top;
+    background-color: rgb(43, 44, 44);
+    border: none;
+    color: #fdfcfc; 
+}
+
+#tabelaExibicao2 td {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.65rem; 
+    vertical-align: top;
+    background-color: rgb(55, 132, 177);
+    border: none;
+    color: #fdfcfc;
+}
+
+
+
+#tabelaExibicao2 th:nth-child(1), #tabelaExibicao2 td:nth-child(1) { width: 5%; } /* OP */
+#tabelaExibicao2 th:nth-child(2), #tabelaExibicao2 td:nth-child(2) { width: 9%; } /* Failure */
+#tabelaExibicao2 th:nth-child(3), #tabelaExibicao2 td:nth-child(3) { /* Cause */
+    width: 10%; 
+    white-space: normal;
+    word-wrap: break-word;
+}
+#tabelaExibicao2 th:nth-child(4), #tabelaExibicao2 td:nth-child(4) { /* Action */
+    width: 13%; 
+    white-space: normal;
+    word-wrap: break-word;
+}
+#tabelaExibicao2 th:nth-child(5), #tabelaExibicao2 td:nth-child(5) { width: 7%; } /* Resp */
+#tabelaExibicao2 th:nth-child(6), #tabelaExibicao2 td:nth-child(6) { width: 8%; } /* Target */
+#tabelaExibicao2 th:nth-child(7), #tabelaExibicao2 td:nth-child(7) { width: 20%; } /* Status */
+
+

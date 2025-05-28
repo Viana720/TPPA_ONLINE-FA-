@@ -468,6 +468,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modalTabelaElement: document.getElementById('modalTabela'),
         tabelaDados: document.getElementById('tabelaDados'),
         tabelaExibicao: document.getElementById('tabelaExibicao'),
+        tabelaExibicao2: document.getElementById('tabelaExibicao2'), // Adicionado
         formEdicao: document.getElementById('formEdicao'),
         botaoSalvarEdicao: document.getElementById('salvarEdicao'),
         botaoCancelarEdicao: document.getElementById('cancelarEdicao'),
@@ -518,7 +519,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!dados || dados.length === 0) {
             const linha = elementoCorpoTabela.insertRow();
             const celula = linha.insertCell();
-            celula.colSpan = 9;
+            celula.colSpan = 9; // Ajuste a coluna conforme a necessidade da tabela
             celula.textContent = "Nenhum dado foi registrado ainda!";
             return;
         }
@@ -527,33 +528,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
         dados.forEach(item => {
             const linha = elementoCorpoTabela.insertRow();
-            linha.dataset.id = item.id;
+            // Apenas adicione o data-id se a tabela for interativa (edição/exclusão)
+            if (elementoCorpoTabela.id === 'tabelaDados') {
+                linha.dataset.id = item.id;
+            }
 
             colunasDados.forEach(chave => {
                 const celula = linha.insertCell();
                 celula.textContent = item[chave];
             });
 
-            // Adicionar Botão de Edição
-            const celulaEdicao = linha.insertCell();
-            const botaoEditar = document.createElement('button');
-            botaoEditar.className = 'btn btn-sm btn-primary editar-linha botao-editar-customizado';
-            botaoEditar.innerHTML = '<img src="./assets/img/Editar.svg" alt="Editar" style="width: 16px; height: 16px;">';
-            botaoEditar.dataset.id = item.id;
-            celulaEdicao.appendChild(botaoEditar);
+            // Adicionar Botões de Edição e Excluir APENAS para a tabela dentro do modal
+            if (elementoCorpoTabela.id === 'tabelaDados') {
+                const celulaEdicao = linha.insertCell();
+                const botaoEditar = document.createElement('button');
+                botaoEditar.className = 'btn btn-sm btn-primary editar-linha botao-editar-customizado';
+                botaoEditar.innerHTML = '<img src="./assets/img/Editar.svg" alt="Editar" style="width: 16px; height: 16px;">';
+                botaoEditar.dataset.id = item.id;
+                celulaEdicao.appendChild(botaoEditar);
 
-            // Adicionar Botão de Excluir
-            const celulaExcluir = linha.insertCell();
-            const botaoExcluir = document.createElement('button');
-            botaoExcluir.className = 'btn btn-sm btn-danger deletar-linha botao-deletar-customizado';
-            botaoExcluir.innerHTML = '<img src="./assets/img/delete.svg" alt="Excluir" style="width: 16px; height: 16px; align-items: center; justify-content: center">';
-            botaoExcluir.dataset.id = item.id;
-            celulaExcluir.appendChild(botaoExcluir);
+                const celulaExcluir = linha.insertCell();
+                const botaoExcluir = document.createElement('button');
+                botaoExcluir.className = 'btn btn-sm btn-danger deletar-linha botao-deletar-customizado';
+                botaoExcluir.innerHTML = '<img src="./assets/img/delete.svg" alt="Excluir" style="width: 16px; height: 16px; align-items: center; justify-content: center">';
+                botaoExcluir.dataset.id = item.id;
+                celulaExcluir.appendChild(botaoExcluir);
+            }
         });
     }
 
     async function lidarComCliqueExibirTabela() {
-        const { datePicker, dropdownMenuButton, tabelaDados, tabelaExibicao, formEdicao } = DOM;
+        const { datePicker, dropdownMenuButton, tabelaDados, tabelaExibicao, tabelaExibicao2, formEdicao } = DOM;
         const data = datePicker.value;
         const linha = dropdownMenuButton.textContent.trim();
 
@@ -565,7 +570,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultado = await buscarDados('consultas/buscarDados.php', `data=${data}&linha=${linha}`);
         if (resultado) {
             const arrayDados = Array.isArray(resultado) ? resultado : (resultado && Object.values(resultado)[0]);
+            
+            // Renderiza os dados na tabela do modal
             renderizarTabela(arrayDados || [], tabelaDados);
+            
+            // Renderiza os dados na nova tabela fora do modal
+            renderizarTabela(arrayDados || [], tabelaExibicao2.getElementsByTagName('tbody')[0] || tabelaExibicao2.createTBody());
+            
             tabelaExibicao.style.display = 'table';
             formEdicao.style.display = 'none';
             myModal.show();
@@ -606,8 +617,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 exibirAlerta('success', 'Excluído!', 'Os dados foram excluídos.');
                 const linhaParaDeletar = DOM.tabelaDados.querySelector(`tr[data-id="${idParaDeletar}"]`);
                 linhaParaDeletar?.remove(); // Operador de encadeamento opcional para remover
+                
+                // Remover a linha da tabela de exibição 2 também (opcional, dependendo da necessidade)
+                const linhaParaDeletar2 = DOM.tabelaExibicao2.querySelector(`tr[data-id="${idParaDeletar}"]`);
+                linhaParaDeletar2?.remove();
+
                 if (DOM.tabelaDados.rows.length === 0) {
                     renderizarTabela([], DOM.tabelaDados);
+                }
+                if (DOM.tabelaExibicao2.getElementsByTagName('tbody')[0]?.rows.length === 0) {
+                     renderizarTabela([], DOM.tabelaExibicao2.getElementsByTagName('tbody')[0] || DOM.tabelaExibicao2.createTBody());
                 }
             }
         }
@@ -640,6 +659,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 linhaSelecionadaParaEdicao.cells[6].textContent = status;
                 DOM.tabelaExibicao.style.display = 'table';
                 DOM.formEdicao.style.display = 'none';
+                
+                // Atualizar a linha correspondente na tabelaExibicao2 também
+                const linhaNaTabela2 = DOM.tabelaExibicao2.querySelector(`tr[data-id="${id}"]`);
+                if (linhaNaTabela2) {
+                    linhaNaTabela2.cells[0].textContent = operacao;
+                    linhaNaTabela2.cells[1].textContent = falha;
+                    linhaNaTabela2.cells[2].textContent = causa;
+                    linhaNaTabela2.cells[3].textContent = acao;
+                    linhaNaTabela2.cells[4].textContent = responsavel;
+                    linhaNaTabela2.cells[5].textContent = dataprevista;
+                    linhaNaTabela2.cells[6].textContent = status;
+                }
+
                 linhaSelecionadaParaEdicao = null;
             }
         }
@@ -672,7 +704,6 @@ document.addEventListener('DOMContentLoaded', function() {
     DOM.botaoSalvarEdicao?.addEventListener('click', lidarComCliqueSalvarEdicao);
     DOM.botaoCancelarEdicao?.addEventListener('click', lidarComCliqueCancelarEdicao);
 });
-
 ///////////////////////////////////////////////////////////// Download da imagem da dashboard como arquivo em  PDF///////////////////////////////////////////////////////////////////
    document.addEventListener('DOMContentLoaded', function () {
     const downloadButton = document.getElementById('Download');
@@ -724,6 +755,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Referências aos botões que você quer ocultar *apenas na captura do PDF*
     const closeButton = document.getElementById('fechar');
     const andonButton = document.getElementById('andon');
+    const action = document.getElementById('action');
+
     // O downloadButton2 já está referenciado, e ele também será ocultado temporariamente
 
     // **IMPORTANTE: Adicionado tabelaExibicao à condição de verificação**
@@ -733,6 +766,7 @@ document.addEventListener('DOMContentLoaded', function () {
             closeButton.style.display = 'none';
             andonButton.style.display = 'none';
             downloadButton2.style.display = 'none';
+            action.style.display = 'none';
 
             // --- INÍCIO DA LÓGICA PARA GARANTIR A DATA COMPLETA ---
             const targetDateCells = tabelaExibicao.querySelectorAll('td:nth-child(6)'); // Seleciona todas as células da 6ª coluna (Target Date)
@@ -811,3 +845,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
 });
+
+
