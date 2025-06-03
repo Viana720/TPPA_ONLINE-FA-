@@ -29,7 +29,7 @@
 }
 
 .dropdown-menu .dropdown-item:hover {
-    background-color: #4eff65;
+    background-color: #0ae8a1;
     color: #f8fafc;
 }
 
@@ -188,17 +188,19 @@ img {
                                                 
 canvas {
     background-color: white;
+    border-radius: 10px;
 } 
 
 
 
 #card1 {
-    height: 400px       ;
+    height: 400px;
     width: 800px;
     margin-top: 50px;
     margin: 10px;
     box-sizing: border-box;
     overflow: hidden;
+     box-shadow: 0 4px 8px rgba(1, 90, 163, 0.685); /* Adicionado */
 }
 
 #card2 {
@@ -207,6 +209,7 @@ canvas {
     margin-top: 50px;
     margin: 10px;
     box-sizing: border-box;
+     box-shadow: 0 4px 8px rgba(1, 90, 163, 0.685); /* Adicionado */
 }
 
 #card3 {
@@ -215,6 +218,7 @@ canvas {
     margin-top: 50px;
     margin: 10px;
     box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(1, 90, 163, 0.685); /* Adicionado */
 }
 
 /*tabela plano de ação*/
@@ -227,6 +231,7 @@ canvas {
     border: none;
     position: relative;
     overflow: hidden; /* Importante para o conteúdo não vazar do card */
+     box-shadow: 0 4px 8px rgba(1, 90, 163, 0.685); /* Adicionado */
 }
 
 #card4 .card-img-overlay {
@@ -243,11 +248,14 @@ canvas {
     overflow: hidden; /* Oculta overflow do próprio overlay */
 }
 
-#card4 .card-img-overlay h5.card-title {
-    flex-shrink: 0;
-    margin-bottom: 0.5rem;
-    color: var(--bs-card-title-color, #f8fafc);
+.card-title{
+    color: #2C3E50;
+  
+    border-radius: 5px;
+    width: 120px;
 }
+
+
 
 input {
     width: 100%;

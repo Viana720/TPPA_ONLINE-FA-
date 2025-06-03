@@ -82,7 +82,7 @@ function criarGraficoVazio(ctx, titulo) {
             datasets: [{
                 label: '',
                 data: [],
-                borderWidth: 1,
+                borderWidth: 0,
                 backgroundColor: ['#2980B9', '#5499C7', '#7FB3D5', '#A9CCE3', '#A9CCE3'],
             }],
         },
@@ -128,7 +128,7 @@ function criarGraficoVazioPareto(ctx, titulo) {
             datasets: [{
                 label: '',
                 data: [],
-                borderWidth: 1,
+                borderWidth: 0,
                 backgroundColor: ['#2980B9', '#5499C7', '#7FB3D5', '#A9CCE3', '#A9CCE3'],
                 barPercentage: 1,
                 categoryPercentage: 1

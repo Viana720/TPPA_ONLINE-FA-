@@ -10,7 +10,7 @@ $linha = $_REQUEST['linha'];
 $nome_operacao = [];
 switch ($linha) {
     case 'REGIO':
-        $nome_operacao = ['OP80'];
+        $nome_operacao = ['OP70B'];
         break;
     case 'GEM':
         $nome_operacao = ['OP80'];
